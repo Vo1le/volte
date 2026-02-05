@@ -133,19 +133,44 @@ function saveArticle() {
 
 function renderAdminList() {
     const l = document.getElementById('existing-articles');
-    l.innerHTML = adminArticles.map(a => `<div class="tag-chip" style="display:block;margin-bottom:5px" onclick="loadEdit(${a.id})">${a.title}</div>`).join('');
+    if (!l) return;
+    l.innerHTML = ''; // On vide proprement la liste
+
+    if (adminArticles.length === 0) {
+        l.innerHTML = '<p style="font-size:0.8em; color:gray;">Aucun article.</p>';
+        return;
+    }
+
+    adminArticles.forEach(a => {
+        const div = document.createElement('div');
+        div.className = 'tag-chip';
+        div.style.display = 'block';
+        div.style.marginBottom = '5px';
+        div.style.cursor = 'pointer';
+        div.innerText = (a.date || '') + " - " + (a.title || 'Sans titre');
+        div.onclick = () => loadEdit(a.id);
+        l.appendChild(div);
+    });
 }
 
 function loadEdit(id) {
     const a = adminArticles.find(x => x.id === id);
+    if (!a) return;
+
     editingId = id;
-    document.getElementById('inp-title').value = a.title;
-    document.getElementById('inp-date').value = a.date;
-    document.getElementById('inp-summary').value = a.summary;
-    document.getElementById('inp-content').value = a.content;
-    tempBadges = [...a.badges];
+    document.getElementById('inp-title').value = a.title || '';
+    document.getElementById('inp-date').value = a.date || '';
+    document.getElementById('inp-summary').value = a.summary || '';
+    document.getElementById('inp-content').value = a.content || '';
+    
+    // Correction ici : on s'assure que badges existe, sinon on met un tableau vide
+    tempBadges = Array.isArray(a.badges) ? [...a.badges] : [];
+    
     renderTempBadges();
-    document.getElementById('form-title').innerText = "Modifier : " + a.title;
+    document.getElementById('form-title').innerText = "Modifier : " + (a.title || 'Sans titre');
+    
+    // Scroll vers le haut pour voir le formulaire
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function resetForm() {
