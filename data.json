@@ -1,13 +1,1 @@
-[
-  {
-    "id": 1707123456789,
-    "title": "Présentation du TIPE",
-    "date": "2024-02-05",
-    "badges": [
-      { "text": "Admin", "color": "#007acc" },
-      { "text": "Intro", "color": "#2ea043" }
-    ],
-    "summary": "Objectifs du logbook et thématique choisie.",
-    "content": "<article> <h2>Présentation du TIPE</h2> <p>Ce site consigne mes recherches MPI.</p> <p>Thème : <strong>[à compléter]</strong></p> </article>"
-  }
-]
+[]
