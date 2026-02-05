@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Admin TIPE</title>
+    <link rel="stylesheet" href="style.css">
+    <body style="display: none;" id="admin-body"> <script>
+        // Vérification immédiate avant même d'afficher le reste
+        const login = prompt("Accès restreint - Mot de passe :");
+        if (login === "mpi2024") {
+            document.getElementById('admin-body').style.display = "block";
+        } else {
+            alert("Accès refusé");
+            window.location.href = "index.html";
+        }
+    </script>
+</head>
+<body>
+    <div class="editor-container">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h1>Gestion TIPE</h1>
+            <button onclick="window.location.href='index.html'" class="btn-primary" style="background:#555">Voir le site</button>
+        </div>
+        <hr>
+
+        <div class="admin-grid">
+            <div class="sidebar-list">
+                <h3>Modifier un article</h3>
+                <div id="existing-articles"></div>
+            </div>
+
+            <div>
+                <h3 id="form-title">Nouvel Article</h3>
+                <form id="editor-form" onsubmit="event.preventDefault(); saveArticle();">
+                    <input type="text" id="inp-title" placeholder="Titre" required>
+                    <div style="display:flex; gap:10px;">
+                        <input type="date" id="inp-date" required style="flex:1">
+                        <input type="text" id="inp-tags" placeholder="Tags (ex: Physique, Code)" style="flex:2">
+                    </div>
+                    
+                    <textarea id="inp-summary" rows="2" placeholder="Résumé (visible quand replié)"></textarea>
+                    <textarea id="inp-content" rows="12" placeholder="Contenu HTML (<p>, <strong>, etc.)"></textarea>
+
+                    <div style="display:flex; gap:10px; margin-top:10px;">
+                        <button type="submit" class="btn-primary" style="flex:1">1. Enregistrer (Mémoire)</button>
+                        <button type="button" onclick="resetForm()" style="background:#444; color:white; border:none; padding:10px;">Nouveau</button>
+                    </div>
+                </form>
+
+                <div class="github-zone">
+                    <h3>🚀 Publication GitHub</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 5px;">
+                        <input type="text" id="gh-username" placeholder="User GitHub">
+                        <input type="text" id="gh-repo" placeholder="Nom du Repo">
+                    </div>
+                    <input type="password" id="gh-token" placeholder="Token (ghp_...)">
+                    
+                    <div style="display: flex; gap: 5px;">
+                        <button onclick="pushToGitHub()" class="btn-primary" style="background: #2ea043; flex: 1;">2. POUSSER EN LIGNE</button>
+                        <button onclick="saveConfig()" style="background: #333; color: #aaa; border:1px solid #555; cursor:pointer;">💾</button>
+                    </div>
+                    <p id="status-msg"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+:root {
+    --bg: #1e1e1e; --sidebar: #252526; --text: #d4d4d4;
+    --accent: #007acc; --border: #3c3c3c; --item-hover: #2a2d2e;
+}
+body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+
+/* Header & Inputs */
+header { display: flex; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 20px; }
+input, textarea, select { width: 100%; background: #3c3c3c; color: white; border: 1px solid #555; padding: 8px; box-sizing: border-box; margin-bottom: 8px; }
+.btn-primary { background: var(--accent); color: white; border: none; padding: 10px; cursor: pointer; font-weight: bold; }
+.btn-primary:hover { opacity: 0.9; }
+
+/* Articles & Folding */
+.article-card { background: var(--sidebar); border: 1px solid var(--border); margin-bottom: 10px; }
+details { width: 100%; }
+summary { padding: 10px; cursor: pointer; background: var(--item-hover); display: flex; align-items: center; font-weight: bold; list-style: none; }
+summary::before { content: '▶'; font-size: 0.8em; margin-right: 10px; display: inline-block; transition: 0.2s; }
+details[open] summary::before { transform: rotate(90deg); }
+.meta-info { margin-left: auto; font-size: 0.85em; color: #858585; font-weight: normal; }
+.article-content { padding: 15px; border-top: 1px solid var(--border); }
+.article-summary { color: #ce9178; font-style: italic; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px dashed #444; }
+
+/* Admin Panel */
+.editor-container { max-width: 900px; margin: 0 auto; }
+.admin-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; }
+.article-list-item { padding: 8px; border-bottom: 1px solid #333; cursor: pointer; font-size: 0.9em; }
+.article-list-item:hover { background: var(--accent); color: white; }
+.github-zone { background: #111; padding: 15px; border: 1px solid #444; margin-top: 20px; border-radius: 4px; }
+#status-msg { font-size: 0.9em; margin-top: 5px; font-weight: bold; }
+
+/* Hidden Trigger */
+#admin-trigger { position: fixed; bottom: 0; right: 0; width: 30px; height: 30px; opacity: 0.01; cursor: default; background: red; z-index: 999; }
+#admin-trigger:hover { opacity: 0.3; }

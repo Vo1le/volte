@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi TIPE - MPI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Logbook TIPE</h1>
+        <div class="controls">
+            <label>Trier par : </label>
+            <select id="sort-select" onchange="sortArticles()">
+                <option value="date-desc">Date (Récent)</option>
+                <option value="date-asc">Date (Ancien)</option>
+                <option value="tag">Catégorie</option>
+            </select>
+        </div>
+    </header>
+
+    <main id="articles-container">
+        </main>
+
+    <div id="admin-trigger" onclick="checkAdmin()" title="Admin Login"></div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
