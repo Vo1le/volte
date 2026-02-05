@@ -1,7 +1,20 @@
 [
   {
+    "id": 1770320075734,
+    "title": "J0 / J1 -  Mise en route",
+    "date": "2026-01-30",
+    "badges": [
+      {
+        "text": "Biblio",
+        "color": "#c01c28"
+      }
+    ],
+    "summary": "Prise d'information. Thème : Efficacité, optimisation, sobriété",
+    "content": "Le tipe est une présentation tournant autour d’une question scientifique. Le but n’est pas d’inventer quelque chose mais de répondre à une question de manière scientifique.\nABSOLUMENT répondre à une question \n<br>\nSources : youtube, videos mais attention remontée aux sources. Pour les sources, regarder sur google scholar et ensuite aller sur sci-hub, site pirate. \nPrendre des thèses de préférence pour avoir bcp de quantité d’infos.\n<br>\nATTENTION: prendre une trace des idées, des questions et des choses que l'on rencontre lors de la mise en place du tipe.\nCréer un site web, ou l’on renseigne l’état de nos sites web.\n<br>\n\nBrainstorming<br>\n\nSobriété : Écologique / énergétique, simplicité, cogénération (utilisation d’une tech pour faire plusieurs tâches avec les énergies résultantes\n<br>\nEfficacité: rendement / conversion d’énergie / moteur / éolienne panneau solaire, processeur, TDP/dissipation de chaleur\n<br>\nOptimisation: trajet réseau, d’un programme complexité temporelle / spatial, sucre syntaxique. Parallélisation des processus du processeur, optimisation du stockage (compression audio / vidéo shannon), les descentes de gradient\n<br>"
+  },
+  {
     "id": 1770313602431,
-    "title": "J0 - Début des recherches",
+    "title": "J3 - Début des recherches",
     "date": "2026-02-02",
     "badges": [
       {
