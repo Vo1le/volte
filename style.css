@@ -31,3 +31,28 @@ details[open] summary::before { transform: rotate(90deg); }
 /* Hidden Trigger */
 #admin-trigger { position: fixed; bottom: 0; right: 0; width: 30px; height: 30px; opacity: 0.01; cursor: default; background: red; z-index: 999; }
 #admin-trigger:hover { opacity: 0.3; }
+/* Badges personnalisés */
+.badge-container { display: flex; gap: 5px; margin-bottom: 10px; flex-wrap: wrap; }
+.custom-badge {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0px 1px 1px rgba(0,0,0,0.3);
+}
+
+/* Filtres de tags */
+#tag-filters { margin-bottom: 15px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.tag-chip {
+    background: #333; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8em;
+    border: 1px solid var(--border);
+}
+.tag-chip.active { background: var(--accent); border-color: #fff; }
+
+/* Admin badge builder */
+.badge-input-row { display: flex; gap: 5px; margin-bottom: 5px; }
+.badge-item { 
+    display: inline-flex; align-items: center; gap: 5px; 
+    background: #444; padding: 2px 8px; border-radius: 4px; margin: 2px;
+}
