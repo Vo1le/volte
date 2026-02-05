@@ -35,7 +35,15 @@
                     <input type="text" id="inp-title" placeholder="Titre" required>
                     <div style="display:flex; gap:10px;">
                         <input type="date" id="inp-date" required style="flex:1">
-                        <input type="text" id="inp-tags" placeholder="Tags (ex: Physique, Code)" style="flex:2">
+                        <<div id="badge-builder">
+                        <label>Balises personnalisées (Biblio, TP, Idée...)</label>
+                        <div class="badge-input-row">
+                            <input type="text" id="tag-text" placeholder="Texte" style="flex:2">
+                            <input type="color" id="tag-color" value="#007acc" style="flex:1; height: 35px;">
+                            <button type="button" onclick="addBadgeToList()" style="flex:1">+</button>
+                        </div>
+                        <div id="current-badges-list" style="margin-bottom: 10px;"></div>
+                    </div>
                     </div>
                     
                     <textarea id="inp-summary" rows="2" placeholder="Résumé (visible quand replié)"></textarea>
