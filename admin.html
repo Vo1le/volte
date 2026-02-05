@@ -2,74 +2,54 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Panel Admin TIPE</title>
+    <title>Admin - Panel TIPE</title>
     <link rel="stylesheet" href="style.css">
-    <body style="display: none;" id="admin-body"> <script>
-        // Vérification immédiate avant même d'afficher le reste
-        const login = prompt("Accès restreint - Mot de passe :");
-        if (login === "mpi2024") {
-            document.getElementById('admin-body').style.display = "block";
-        } else {
-            alert("Accès refusé");
-            window.location.href = "index.html";
-        }
-    </script>
 </head>
-<body>
+<body style="display:none;" id="admin-page">
     <div class="editor-container">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h1>Gestion TIPE</h1>
-            <button onclick="window.location.href='index.html'" class="btn-primary" style="background:#555">Voir le site</button>
-        </div>
-        <hr>
+        <header>
+            <h1>Panel de Rédaction</h1>
+            <button onclick="window.location.href='index.html'" class="btn-primary" style="background:#444">Retour Site</button>
+        </header>
 
         <div class="admin-grid">
-            <div class="sidebar-list">
-                <h3>Modifier un article</h3>
+            <aside class="sidebar-list">
+                <h3>Historique</h3>
                 <div id="existing-articles"></div>
-            </div>
+            </aside>
 
-            <div>
+            <main>
                 <h3 id="form-title">Nouvel Article</h3>
                 <form id="editor-form" onsubmit="event.preventDefault(); saveArticle();">
-                    <input type="text" id="inp-title" placeholder="Titre" required>
-                    <div style="display:flex; gap:10px;">
-                        <input type="date" id="inp-date" required style="flex:1">
-                        <<div id="badge-builder">
-                        <label>Balises personnalisées (Biblio, TP, Idée...)</label>
-                        <div class="badge-input-row">
-                            <input type="text" id="tag-text" placeholder="Texte" style="flex:2">
-                            <input type="color" id="tag-color" value="#007acc" style="flex:1; height: 35px;">
-                            <button type="button" onclick="addBadgeToList()" style="flex:1">+</button>
-                        </div>
-                        <div id="current-badges-list" style="margin-bottom: 10px;"></div>
-                    </div>
-                    </div>
+                    <input type="text" id="inp-title" placeholder="Titre de l'étape" required>
+                    <input type="date" id="inp-date" required>
                     
-                    <textarea id="inp-summary" rows="2" placeholder="Résumé (visible quand replié)"></textarea>
-                    <textarea id="inp-content" rows="12" placeholder="Contenu HTML (<p>, <strong>, etc.)"></textarea>
-
-                    <div style="display:flex; gap:10px; margin-top:10px;">
-                        <button type="submit" class="btn-primary" style="flex:1">1. Enregistrer (Mémoire)</button>
-                        <button type="button" onclick="resetForm()" style="background:#444; color:white; border:none; padding:10px;">Nouveau</button>
+                    <div class="badge-builder">
+                        <div class="badge-inputs">
+                            <input type="text" id="tag-text" placeholder="Nom balise (ex: Biblio)">
+                            <input type="color" id="tag-color" value="#007acc">
+                            <button type="button" onclick="addBadge()">Ajouter Balise</button>
+                        </div>
+                        <div id="current-badges-list"></div>
                     </div>
+
+                    <textarea id="inp-summary" rows="2" placeholder="Résumé court..."></textarea>
+                    <textarea id="inp-content" rows="10" placeholder="Contenu HTML..."></textarea>
+                    
+                    <button type="submit" class="btn-primary" style="width:100%">1. Sauvegarder en mémoire</button>
                 </form>
 
-                <div class="github-zone">
-                    <h3>Publiction des modificationss</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 5px;">
-                        <input type="text" id="gh-username" placeholder="User GitHub">
-                        <input type="text" id="gh-repo" placeholder="Nom du Repo">
+                <section class="github-zone">
+                    <h3>🚀 Publication GitHub API</h3>
+                    <div class="gh-inputs">
+                        <input type="text" id="gh-u" placeholder="User">
+                        <input type="text" id="gh-r" placeholder="Repo">
+                        <input type="password" id="gh-t" placeholder="Token GitHub">
                     </div>
-                    <input type="password" id="gh-token" placeholder="Token (ghp_...)">
-                    
-                    <div style="display: flex; gap: 5px;">
-                        <button onclick="pushToGitHub()" class="btn-primary" style="background: #2ea043; flex: 1;">2. POUSSER EN LIGNE</button>
-                        <button onclick="saveConfig()" style="background: #333; color: #aaa; border:1px solid #555; cursor:pointer;">💾</button>
-                    </div>
+                    <button onclick="pushToGitHub()" class="btn-push">2. POUSSER LES MODIFICATIONS</button>
                     <p id="status-msg"></p>
-                </div>
-            </div>
+                </section>
+            </main>
         </div>
     </div>
     <script src="script.js"></script>
