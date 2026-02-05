@@ -3,34 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suivi TIPE - MPI</title>
+    <title>TIPE - Suivi Opérationnel</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header>
         <h1>Logbook TIPE</h1>
         <div class="controls">
-            <label>Trier par : </label>
             <select id="sort-select" onchange="sortArticles()">
-                <option value="date-desc">Date (Récent)</option>
-                <option value="date-asc">Date (Ancien)</option>
-                <option value="tag">Catégorie</option>
+                <option value="date-desc">Plus récent</option>
+                <option value="date-asc">Plus ancien</option>
             </select>
         </div>
-        <div id="tag-filters">
-    <span>Filtrer par :</span>
-    <div id="filter-chips"></div>
-        <button onclick="clearFilter()" style="font-size: 0.7em; background: none; border: 1px solid #555; color: #888; cursor: pointer;">Réinitialiser</button>
-    </div>
-        
     </header>
 
-    <main id="articles-container">
-        </main>
+    <nav id="tag-filters">
+        <span style="font-size: 0.8em; color: #888;">FILTRER PAR :</span>
+        <div id="filter-chips"></div>
+        <button onclick="clearFilter()" id="btn-reset">Réinitialiser</button>
+    </nav>
 
-    <div id="admin-trigger" onclick="checkAdmin()" title="Admin Login"></div>
+    <main id="articles-container"></main>
+
+    <div id="admin-trigger" onclick="checkAdmin()"></div>
 
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
