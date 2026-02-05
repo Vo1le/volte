@@ -1,49 +1,108 @@
 const REPO_FILE = "data.json";
 
 // --- PARTIE PUBLIQUE (INDEX) ---
-async function loadArticles() {
-    if (!document.getElementById('articles-container')) return;
-    try {
-        const response = await fetch(REPO_FILE + '?t=' + Date.now()); // Anti-cache
-        window.allArticles = await response.json();
-        renderArticles(window.allArticles);
-    } catch (e) { console.error("Erreur load:", e); }
-}
+let currentFilter = null;
 
+// --- RENDU INDEX ---
 function renderArticles(list) {
     const container = document.getElementById('articles-container');
     container.innerHTML = '';
-    list.forEach(art => {
+    
+    // Filtrage
+    const filtered = currentFilter ? list.filter(a => a.badges.some(b => b.text === currentFilter)) : list;
+    
+    filtered.forEach(art => {
+        const badgesHtml = art.badges.map(b => `<span class="custom-badge" style="background:${b.color}">${b.text}</span>`).join('');
         const div = document.createElement('div');
         div.className = 'article-card';
         div.innerHTML = `
             <details open>
                 <summary>
                     <span>${art.title}</span>
-                    <span class="meta-info">[${art.tags.join(', ')}] - ${art.date}</span>
+                    <span class="meta-info">${art.date}</span>
                 </summary>
                 <div class="article-content">
+                    <div class="badge-container">${badgesHtml}</div>
                     <div class="article-summary">${art.summary}</div>
                     <div>${art.content}</div>
                 </div>
             </details>`;
         container.appendChild(div);
     });
+    updateFilterChips(list);
 }
 
-function sortArticles() {
-    const mode = document.getElementById('sort-select').value;
-    let sorted = [...window.allArticles];
-    if (mode === 'date-desc') sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
-    if (mode === 'date-asc') sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
-    if (mode === 'tag') sorted.sort((a, b) => a.tags[0].localeCompare(b.tags[0]));
-    renderArticles(sorted);
+function updateFilterChips(allArticles) {
+    const chipContainer = document.getElementById('filter-chips');
+    if (!chipContainer) return;
+    
+    const tags = new Set();
+    allArticles.forEach(a => a.badges.forEach(b => tags.add(b.text)));
+    
+    chipContainer.innerHTML = '';
+    tags.forEach(tag => {
+        const span = document.createElement('span');
+        span.className = `tag-chip ${currentFilter === tag ? 'active' : ''}`;
+        span.innerText = tag;
+        span.onclick = () => { currentFilter = tag; renderArticles(window.allArticles); };
+        chipContainer.appendChild(span);
+    });
 }
 
-function checkAdmin() {
-    if (prompt("Mot de passe :") === "mpi2024") window.location.href = "admin.html";
+function clearFilter() { currentFilter = null; renderArticles(window.allArticles); }
+
+// --- LOGIQUE ADMIN BADGES ---
+let tempBadges = [];
+
+function addBadgeToList() {
+    const text = document.getElementById('tag-text').value;
+    const color = document.getElementById('tag-color').value;
+    if(!text) return;
+    
+    tempBadges.push({ text, color });
+    document.getElementById('tag-text').value = '';
+    renderTempBadges();
 }
 
+function renderTempBadges() {
+    const list = document.getElementById('current-badges-list');
+    list.innerHTML = tempBadges.map((b, i) => `
+        <span class="badge-item" style="border-left: 4px solid ${b.color}">
+            ${b.text} <span onclick="tempBadges.splice(${i},1);renderTempBadges();" style="cursor:pointer;color:red">×</span>
+        </span>
+    `).join('');
+}
+
+// Modifier la fonction saveArticle pour inclure les badges
+function saveArticle() {
+    const data = {
+        id: editingId || Date.now(),
+        title: document.getElementById('inp-title').value,
+        date: document.getElementById('inp-date').value,
+        badges: tempBadges, // On utilise les badges dynamiques
+        summary: document.getElementById('inp-summary').value,
+        content: document.getElementById('inp-content').value
+    };
+    // ... reste de la fonction saveArticle comme avant
+    if(editingId) {
+        const idx = adminArticles.findIndex(a => a.id === editingId);
+        adminArticles[idx] = data;
+    } else { adminArticles.unshift(data); }
+    
+    tempBadges = []; renderAdminList(); resetForm(); renderTempBadges();
+}
+
+// Modifier loadEdit pour charger les badges
+function loadEdit(id) {
+    const art = adminArticles.find(a => a.id === id);
+    editingId = id;
+    document.getElementById('inp-title').value = art.title;
+    document.getElementById('inp-date').value = art.date;
+    tempBadges = art.badges || []; // Récupère les badges existants
+    renderTempBadges();
+    document.getElementById('inp-summary').value = art.summary;
+    document.getElementById('inp-content').value = art.content;
+}
 // --- PARTIE ADMIN ---
 let adminArticles = [];
 let editingId = null;
