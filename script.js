@@ -75,6 +75,12 @@ function sortArticles() {
     renderArticles();
 }
 
+window.onload = function() {
+    const mode = 'date-desc';
+    allArticles.sort((a, b) => mode === 'date-desc' ? new Date(b.date) - new Date(a.date) : new Date(a.date) - new Date(b.date));
+    renderArticles();
+};
+
 // --- LOGIQUE ADMIN ---
 async function initAdmin() {
     const p = prompt("Confirmer Mot de Passe :");
