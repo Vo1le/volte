@@ -9,6 +9,9 @@ let editingId = null;
 document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('articles-container')) initPublic();
     if (document.getElementById('admin-page')) initAdmin();
+    const mode = "date-desc";
+    allArticles.sort((a, b) => mode === 'date-desc' ? new Date(b.date) - new Date(a.date) : new Date(a.date) - new Date(b.date));
+    renderArticles();
 });
 
 function checkAdmin() {
