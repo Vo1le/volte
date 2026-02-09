@@ -76,7 +76,7 @@ function sortArticles() {
 }
 
 window.onload = function() {
-    const mode = 'date-desc';
+    const mode = "date-desc";
     allArticles.sort((a, b) => mode === 'date-desc' ? new Date(b.date) - new Date(a.date) : new Date(a.date) - new Date(b.date));
     renderArticles();
 };
