@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function checkAdmin() {
     const p = prompt("Accès Admin :");
-    if (p === "mpi2024") window.location.href = "admin.html";
+    if (p === "mpi2025") window.location.href = "admin.html";
 }
 
 // --- LOGIQUE PUBLIQUE ---

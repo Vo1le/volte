@@ -1,5 +1,5 @@
 :root { --bg: #1e1e1e; --sidebar: #252526; --text: #d4d4d4; --accent: #007acc; --border: #3c3c3c; }
-body { font-family: 'Consolas', 'Monaco', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+body { font-family: 'Consolas', 'Monaco', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; font-family: 'Courier New', monospace; }
 
 /* Layout & Elements */
 header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
@@ -33,3 +33,30 @@ details[open] summary::before { transform: rotate(90deg); }
 .github-zone { background: #111; padding: 15px; border: 1px dashed var(--accent); margin-top: 30px; }
 .btn-push { width: 100%; padding: 15px; background: #2ea043; color: white; border: none; font-weight: bold; cursor: pointer; }
 #admin-trigger { position: fixed; bottom: 0; right: 0; width: 25px; height: 25px; opacity: 0.02; cursor: pointer; background: red; }
+
+.styledwritingcintener {
+    width: 100px;
+}
+
+.styledwriting h1 {
+  overflow: hidden;
+  border-right: .15em solid orange; 
+  white-space: nowrap; 
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret .75s step-end infinite;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: rgb(255, 255, 255); }
+}
+
