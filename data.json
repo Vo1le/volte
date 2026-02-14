@@ -1,5 +1,18 @@
 [
   {
+    "id": 1771060181955,
+    "title": "J6 - Présentation TIPE 5/2",
+    "date": "2026-02-13",
+    "badges": [
+      {
+        "text": "Intervenant",
+        "color": "#813d9c"
+      }
+    ],
+    "summary": "Présentation du TIPE de deux 5/2",
+    "content": "1er exposée : sur le cryptage de message. <br>\nTrès expérimental, pleins de cas particuliers et manipulations informatiques de réalisée. C'est une grosse plus value.<br>\nLes concepts théoriques sont expliqué avec une certaines clarté et la vulgarisation est brève mais efficace.<br> \nUn autre point fort, les applications en conditions réel du TIPE sont multiples et viennent directement à l'esprit.<br>\n-> 15.5/20\n<br><br>\n2éme exposée: la surveillances de polygones.<br>\nSituation réel mais les idées tels que la géométrie sont dur à explicité à l'oral. De plus, de tels sujets sont propice à des mauvaises conceptions mental des concepts ou du moins différent de ceux pensée par le candidat<br>\nCelon moi, cela crée une certaines confusion et celle-ci est amplifiée par les manipulations abstraites.<br>\nMoins ancrée dans la réalité et les applications sont limité à une situation particulière, même si intéressante.\n<br> \n->13.5/20 "
+  },
+  {
     "id": 1770721159914,
     "title": "J5 - Clarification ",
     "date": "2026-02-09",
