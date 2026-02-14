@@ -8,10 +8,6 @@
 </head>
 <style>
 
-.styledwritingcintener {
-    width: 100px;
-}
-
 .styledwriting h1 {
   overflow: hidden;
   border-right: .15em solid orange; 
@@ -22,23 +18,49 @@
     blink-caret .75s step-end infinite;
 }
 
-/* The typing effect */
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+.styledwriting h1:first-child {
+  border-right: .15em solid orange; 
+  animation: 
+    typing 3.5s steps(40, end) forwards;
 }
 
-/* The typewriter cursor effect */
+.styledwriting h1:last-child {
+  animation: 
+    typing 3.5s steps(40, end) 3.5s forwards, 
+    blink-caret .75s step-end infinite;
+  opacity: 0;
+  animation: 
+    typing 3.5s steps(40, end) 3.5s forwards,
+    blink-caret .75s step-end 3.5s infinite; /* curseur aussi retardé */
+  
+}
+@keyframes typing {
+  0% { 
+    width: 0; 
+    opacity: 1;
+  }
+  99%{
+    width: 100%;
+    opacity: 1;
+  }
+  100% { 
+    width: 100%;
+    opacity: 1;
+    border-right-color: transparent;
+  }
+}
+
 @keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: rgb(255, 255, 255); }
+  from, to { border-color: transparent; }
+  50% { border-color: #ffb347; }
 }
 </style>
 <body>
     <header>
         <div class="styledwritingcontener">
             <div class="styledwriting">
-                <h1>Logbook TIPE - Natan Ruiz - work in progress...</h1>
+                <h1>Logbook TIPE - Natan Ruiz </h1>
+                <h1 >work in progress...</h1>
             </div>
         </div>
         <div class="controls">
