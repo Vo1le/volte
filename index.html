@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TIPE - Suivi Opérationnel</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Highlight.js pour coloration syntaxique -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
 </head>
 <style>
 
@@ -12,7 +14,7 @@
   overflow: hidden;
   border-right: .15em solid orange; 
   white-space: nowrap; 
-  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  margin: 0 auto;
   animation: 
     typing 3.5s steps(40, end),
     blink-caret .75s step-end infinite;
@@ -31,7 +33,7 @@
   opacity: 0;
   animation: 
     typing 3.5s steps(40, end) 3.5s forwards,
-    blink-caret .75s step-end 3.5s infinite; /* curseur aussi retardé */
+    blink-caret .75s step-end 3.5s infinite;
   
 }
 @keyframes typing {
@@ -67,6 +69,7 @@
         </div>
         </div>
         <div class="controls">
+            <button onclick="window.location.href='files.html'" class="btn-files">📚 Bibliothèque de fichiers</button>
             <select id="sort-select" onchange="sortArticles()">
                 <option value="date-desc">Plus récent</option>
                 <option value="date-asc">Plus ancien</option>
@@ -84,6 +87,16 @@
 
     <div id="admin-trigger" onclick="checkAdmin()"></div>
 
+    <!-- Modal pour visualiser les fichiers -->
+    <div id="file-modal" class="modal">
+        <div class="modal-content file-viewer">
+            <span class="close" onclick="closeFileModal()">&times;</span>
+            <h2 id="file-title"></h2>
+            <div id="file-content"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

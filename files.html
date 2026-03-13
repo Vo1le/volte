@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bibliothèque de Fichiers - TIPE</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+</head>
+<body>
+    <header>
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+            <div style="display: flex; align-items: center;">
+                <img src="https://avatars.githubusercontent.com/u/82891603?v=4" style="border-radius: 50%; width: 5vw; margin-bottom: 20px; margin-right: 20px;">
+                <h1>📚 Bibliothèque de Fichiers</h1>
+            </div>
+            <button onclick="window.location.href='index.html'" class="btn-back">← Retour au logbook</button>
+        </div>
+    </header>
+
+    <nav id="file-filters">
+        <span style="font-size: 0.8em; color: #888;">FILTRER PAR TYPE :</span>
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-type="all" onclick="filterFiles('all')">Tous</button>
+            <button class="filter-btn" data-type="pdf" onclick="filterFiles('pdf')">📄 PDF</button>
+            <button class="filter-btn" data-type="code" onclick="filterFiles('code')">💻 Code</button>
+            <button class="filter-btn" data-type="image" onclick="filterFiles('image')">🖼️ Images</button>
+            <button class="filter-btn" data-type="other" onclick="filterFiles('other')">📎 Autres</button>
+        </div>
+    </nav>
+
+    <main id="files-container">
+        <div class="loading">Chargement des fichiers...</div>
+    </main>
+
+    <!-- Modal pour visualiser les fichiers -->
+    <div id="file-modal" class="modal">
+        <div class="modal-content file-viewer">
+            <span class="close" onclick="closeFileModal()">&times;</span>
+            <h2 id="file-title"></h2>
+            <div id="file-content"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initFilesPage();
+        });
+    </script>
+</body>
+</html>
