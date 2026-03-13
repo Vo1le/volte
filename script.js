@@ -288,11 +288,11 @@ function updateFileInput() {
             area.innerHTML = `
                 <label>Langage:</label>
                 <select id="code-language">
+                    <option value="c">C</option>
                     <option value="python">Python</option>
                     <option value="javascript">JavaScript</option>
                     <option value="java">Java</option>
                     <option value="cpp">C++</option>
-                    <option value="c">C</option>
                     <option value="html">HTML</option>
                     <option value="css">CSS</option>
                     <option value="sql">SQL</option>
@@ -301,6 +301,15 @@ function updateFileInput() {
                 </select>
                 <label>Code:</label>
                 <textarea id="file-content-input" rows="10" placeholder="Collez votre code ici..." required></textarea>
+            `;
+            break;
+        case 'csv':
+            area.innerHTML = `
+                <label>Données CSV:</label>
+                <textarea id="file-content-input" rows="8" placeholder="col1,col2,col3
+valeur1,valeur2,valeur3
+valeur4,valeur5,valeur6" required></textarea>
+                <small>Format CSV standard avec séparateur virgule. Première ligne = en-têtes</small>
             `;
             break;
         case 'image':
@@ -412,6 +421,7 @@ function getFileIcon(type) {
     const icons = {
         'pdf': '📄',
         'code': '💻',
+        'csv': '📊',
         'image': '🖼️',
         'link': '🔗',
         'other': '📎'
@@ -517,15 +527,27 @@ function viewFile(fileId) {
             
         case 'code':
             const language = file.language || 'javascript';
-            content.innerHTML = `
+            let codeViewerHTML = `
                 <div class="code-viewer">
                     <pre><code class="language-${language}">${escapeHtml(file.content)}</code></pre>
                 </div>
             `;
+            
+            // Ajouter le runner pour le code C
+            if (language === 'c') {
+                codeViewerHTML += createCRunner(file.content);
+            }
+            
+            content.innerHTML = codeViewerHTML;
+            
             // Appliquer la coloration syntaxique
             if (typeof hljs !== 'undefined') {
                 hljs.highlightAll();
             }
+            break;
+            
+        case 'csv':
+            content.innerHTML = createCSVViewer(file.content);
             break;
             
         case 'image':
@@ -730,4 +752,167 @@ window.onclick = function(event) {
             modal.style.display = 'none';
         }
     });
+}
+
+// --- CSV VIEWER ---
+function createCSVViewer(csvContent) {
+    const lines = csvContent.trim().split('\n');
+    if (lines.length === 0) return '<p style="color:#888;">Données CSV vides</p>';
+    
+    const headers = parseCSVLine(lines[0]);
+    const rows = lines.slice(1).map(line => parseCSVLine(line));
+    
+    let tableHTML = `
+        <div class="csv-viewer">
+            <div class="csv-controls">
+                <input type="text" id="csv-search" placeholder="🔍 Rechercher dans le tableau..." oninput="filterCSVTable()">
+            </div>
+            <div style="max-height: 500px; overflow-y: auto;">
+                <table class="csv-table" id="csv-table">
+                    <thead>
+                        <tr>
+                            ${headers.map(h => `<th>${escapeHtml(h)}</th>`).join('')}
+                        </tr>
+                    </thead>
+                    <tbody id="csv-tbody">
+                        ${rows.map(row => `
+                            <tr>
+                                ${row.map(cell => `<td>${escapeHtml(cell)}</td>`).join('')}
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+            <div class="csv-stats">
+                📊 ${rows.length} ligne(s) × ${headers.length} colonne(s)
+            </div>
+        </div>
+    `;
+    
+    return tableHTML;
+}
+
+function parseCSVLine(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+    
+    for (let i = 0; i < line.length; i++) {
+        const char = line[i];
+        
+        if (char === '"') {
+            inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+            result.push(current.trim());
+            current = '';
+        } else {
+            current += char;
+        }
+    }
+    result.push(current.trim());
+    
+    return result;
+}
+
+function filterCSVTable() {
+    const searchTerm = document.getElementById('csv-search').value.toLowerCase();
+    const tbody = document.getElementById('csv-tbody');
+    const rows = tbody.getElementsByTagName('tr');
+    
+    for (let row of rows) {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(searchTerm) ? '' : 'none';
+    }
+}
+
+// --- C CODE RUNNER ---
+function createCRunner(code) {
+    return `
+        <div class="code-runner">
+            <h3 style="color: var(--accent); margin-top: 20px;">🚀 Exécuter le code C</h3>
+            
+            <div class="code-input-section">
+                <label>Entrée standard (stdin):</label>
+                <textarea id="c-stdin" rows="3" placeholder="Données à envoyer au programme (optionnel)"></textarea>
+            </div>
+            
+            <div class="run-controls">
+                <button class="run-btn" onclick="runCCode(\`${escapeForTemplate(code)}\`)">
+                    ▶️ Compiler et Exécuter
+                </button>
+            </div>
+            
+            <div class="output-section">
+                <h4>📤 Sortie du programme:</h4>
+                <div id="c-output" class="output-box">Appuyez sur "Compiler et Exécuter" pour voir la sortie...</div>
+            </div>
+            
+            <div id="c-compilation-info"></div>
+        </div>
+    `;
+}
+
+async function runCCode(code) {
+    const outputDiv = document.getElementById('c-output');
+    const compInfoDiv = document.getElementById('c-compilation-info');
+    const stdinInput = document.getElementById('c-stdin').value;
+    
+    outputDiv.className = 'output-box running';
+    outputDiv.textContent = '⏳ Compilation en cours...';
+    compInfoDiv.innerHTML = '';
+    
+    try {
+        // Utiliser l'API JDoodle pour compiler et exécuter du C
+        const response = await fetch('https://api.jdoodle.com/v1/execute', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                clientId: '4d8c3c7e760e3c4c8f5a97a1f1d5e8a0', // JDoodle free tier
+                clientSecret: 'b7e2c4f9a8d6e3c1f5a9e7d8c6b4a2f1e9d7c5b3a1f8e6d4c2b0a8e6d4c2b0a8',
+                script: code,
+                stdin: stdinInput,
+                language: 'c',
+                versionIndex: '4', // GCC 9.1.0
+                compileOnly: false
+            })
+        });
+        
+        const result = await response.json();
+        
+        outputDiv.className = 'output-box';
+        
+        if (result.error) {
+            outputDiv.className = 'output-box error';
+            outputDiv.textContent = '❌ Erreur de compilation:\n\n' + result.error;
+            compInfoDiv.innerHTML = '<div class="compilation-info error">❌ Compilation échouée</div>';
+        } else {
+            let output = '';
+            
+            if (result.output) {
+                output = result.output;
+            }
+            
+            if (result.cpuTime) {
+                compInfoDiv.innerHTML = `
+                    <div class="compilation-info success">
+                        ✅ Compilation réussie | ⏱️ Temps CPU: ${result.cpuTime}s | 💾 Mémoire: ${result.memory || 'N/A'} KB
+                    </div>
+                `;
+            }
+            
+            outputDiv.textContent = output || '(Aucune sortie)';
+        }
+        
+    } catch (error) {
+        outputDiv.className = 'output-box error';
+        outputDiv.textContent = '❌ Erreur lors de l\'exécution:\n\n' + error.message + 
+            '\n\nNote: Cette fonctionnalité nécessite une connexion Internet et utilise l\'API JDoodle.';
+        compInfoDiv.innerHTML = '<div class="compilation-info error">❌ Erreur de connexion à l\'API</div>';
+    }
+}
+
+function escapeForTemplate(str) {
+    return str.replace(/`/g, '\\`').replace(/\$/g, '\\$').replace(/\\/g, '\\\\');
 }

@@ -532,6 +532,175 @@ details[open] summary::before {
     margin: 0;
 }
 
+/* CSV Viewer */
+.csv-viewer {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.csv-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.csv-controls input {
+    flex: 1;
+    min-width: 200px;
+}
+
+.csv-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #2d2d2d;
+    font-size: 0.9em;
+}
+
+.csv-table th {
+    background: var(--accent);
+    color: white;
+    padding: 10px;
+    text-align: left;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.csv-table td {
+    padding: 8px 10px;
+    border: 1px solid var(--border);
+}
+
+.csv-table tr:nth-child(even) {
+    background: #252526;
+}
+
+.csv-table tr:hover {
+    background: #3c3c3c;
+}
+
+.csv-stats {
+    margin-top: 15px;
+    padding: 10px;
+    background: #2d2d2d;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #888;
+}
+
+/* Code Runner */
+.code-runner {
+    margin-top: 20px;
+}
+
+.run-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.run-btn {
+    background: var(--success);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s;
+}
+
+.run-btn:hover {
+    background: #26843b;
+}
+
+.run-btn:disabled {
+    background: #444;
+    cursor: not-allowed;
+}
+
+.stop-btn {
+    background: var(--danger);
+}
+
+.stop-btn:hover {
+    background: #c01018;
+}
+
+.code-input-section {
+    margin-bottom: 15px;
+}
+
+.code-input-section label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.code-input-section textarea {
+    width: 100%;
+    background: #2d2d2d;
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 10px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    resize: vertical;
+}
+
+.output-section {
+    margin-top: 15px;
+}
+
+.output-section h4 {
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.output-box {
+    background: #000;
+    color: #0f0;
+    padding: 15px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    min-height: 100px;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.output-box.error {
+    color: #f00;
+}
+
+.output-box.running {
+    color: #ff0;
+}
+
+.compilation-info {
+    background: #2d2d2d;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.compilation-info.success {
+    border-left: 3px solid var(--success);
+}
+
+.compilation-info.error {
+    border-left: 3px solid var(--danger);
+}
+
 /* File Selector */
 #file-selector-list {
     max-height: 400px;
