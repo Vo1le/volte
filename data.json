@@ -1,5 +1,65 @@
 [
   {
+    "id": 1774873858935,
+    "title": "J10 - Réflexion et discussion",
+    "date": "2026-03-27",
+    "badges": [
+      {
+        "text": "Ressources et codes",
+        "color": "#c0bfbc"
+      }
+    ],
+    "summary": "Discution avec Mme Miriaz. Réflexion sur le fitness.",
+    "content": "Formule de fitness ( variable a optimisée en premier lieux). Avec, a,b,c,d des coef de pondération a choisir plus tard.\nFitness = a*(proximité à des sources de refroidissement) b*(longueur des câbles ) c*(densité minimaliste du réseau)  d*(performance du reséau → perte de donées etc etc)\n\"Optimizing Antenna Positioning for Enhanced Wireless Coverage: A Genetic Algorithm Approach\" MDPI Sensors, 2024 https://pmc.ncbi.nlm.nih.gov/articles/PMC11014192/\n",
+    "attachedFiles": []
+  },
+  {
+    "id": 1774873779969,
+    "title": "J9 - Data creation and load",
+    "date": "2026-03-23",
+    "badges": [
+      {
+        "text": "Ressources et codes",
+        "color": "#c0bfbc"
+      }
+    ],
+    "summary": " Data creation and load",
+    "content": "Sur les semaines précédente j’ai récupérer des données sur les antennes leur caractéristiques et leur positions sur la base de donnée du gouvernement fournis par ANFR. (institu des télécomunications française).\nChoix du python pour le projet. Raison: manipulation de grand dataset et de l'algorithme génétique, le python est optimisé pour cela et beaucoup plus simple. Les données de l’ANFR étant conséquente je manipule les données en .parquet, ce qui est fortement recommandé dans mon cas (bib pyarrow).\nPremière étape : le traitement de la database. On lit les données en CV, convertis les données en lat et longitude et je fais un prétraitement pour conserver les données relatives à la France métropolitaine. (on enléve les DOM COM)\n",
+    "attachedFiles": []
+  },
+  {
+    "id": 1774873630437,
+    "title": "J8 - Choix final",
+    "date": "2026-03-09",
+    "badges": [
+      {
+        "text": "Biblio",
+        "color": "#c01c28"
+      },
+      {
+        "text": "Idée de TIPE",
+        "color": "#1c71d8"
+      }
+    ],
+    "summary": "Discution avec prof.",
+    "content": "Choix final: orientation mathématique et informatique du projet.\nTo do liste (projet minimaliste / base du projet):\nfaire moi un prototype rapide sur cela dans le but d'optimiser des distances entre des points d'intérêt styles villes, des prérequis de conso énergétique / budgétaire / performance transmission de données.\nCharger des données de map, si possibles, toute la data style (distances 2d, points d’eau en liens avec la théorie physique, infrastructure data existante je veux dire les tours de télécom, data center etc). \nUtilisé potentiellement des heatmap pour repérer les points d'intérêt, utiliser la théorie des graphs pour regarder de possible opti.\nCoupler les heatmap, données géographiques avec un algorithme génétique / des recuits simulé\n",
+    "attachedFiles": []
+  },
+  {
+    "id": 1774873569137,
+    "title": "J7 - Intervention",
+    "date": "2026-03-06",
+    "badges": [
+      {
+        "text": "Intervenant",
+        "color": "#813d9c"
+      }
+    ],
+    "summary": "Intervention d’un ancien élève de Mr Noyer pour nous donner des idées de TIPE.\t\n",
+    "content": "Pourquoi faire un tipe d’info: science jeune et on arrive plus vite à des questions ouvertes. Si on aime les applications concrètes par rapport au maths qui sont souvent abstraite c’est cool. On garde à une bonne distance la pratique\nC’est orienté recherches donc il faut connaître la panorama scientifique autour de notre sujet. Lire les rapports de jury pour savoir les erreurs récurrente et les sujets trop vu / les recommandations du jury d’une année à l'autres\nDans notre sujet / thème: Étude des systèmes dynamiques, temps direct / temps discret. Les systèmes chaotiques. Étude des ensembles d’états, pixellisation des ensembles d’états.\nListe de différents problèmes algorithmique: automates cellulaires: problème de consensus (voir automate de Kurdyumov, solution déjà existante, analyse complexité etc), Le diagnostic décentralisé (chaque pixel donne des états d’un serveur par exemple et on veut grâce à cela crée des états d’alerte de manière décentralisé en faisant en sorte que les pixels regarde leur voisins, voir article avec des solutions déjà existantes), L'escouade de tirer (un général et son escouade de tire d’une certaines taille et on a envie de pouvoir donner un ordre et que cela se transmette localement, application processor processeur, activation simultanée processus), Gaz sur réseau (simuler la diffusion d’un gaz, simulation de proche en proche avec des arrondis de nombre entier ? à approfondir si besoin. )\nIFS -> pour générer les fractals, équations logistiques.\nSite de Stephen Wolfram pour les automates cellulaires.\nAttention il vaut mieux avoir un sujet plus modeste et maîtriser totalement le sujet et ces environ que de faire des choses compliquées que l’on ne maîtrise pas.\n",
+    "attachedFiles": []
+  },
+  {
     "id": 1771060181955,
     "title": "J6 - Présentation TIPE 5/2",
     "date": "2026-02-13",
@@ -10,7 +70,8 @@
       }
     ],
     "summary": "Présentation du TIPE de deux 5/2",
-    "content": "1er exposée : sur le cryptage de message. <br>\nTrès expérimental, pleins de cas particuliers et manipulations informatiques de réalisée. C'est une grosse plus value.<br>\nLes concepts théoriques sont expliqué avec une certaines clarté et la vulgarisation est brève mais efficace.<br> \nUn autre point fort, les applications en conditions réel du TIPE sont multiples et viennent directement à l'esprit.<br>\n-> 15.5/20\n<br><br>\n2éme exposée: la surveillances de polygones.<br>\nSituation réel mais les idées tels que la géométrie sont dur à explicité à l'oral. De plus, de tels sujets sont propice à des mauvaises conceptions mental des concepts ou du moins différent de ceux pensée par le candidat<br>\nCelon moi, cela crée une certaines confusion et celle-ci est amplifiée par les manipulations abstraites.<br>\nMoins ancrée dans la réalité et les applications sont limité à une situation particulière, même si intéressante.\n<br> \n->13.5/20 "
+    "content": "1er exposée : sur le cryptage de message. <br>\nTrès expérimental, pleins de cas particuliers et manipulations informatiques de réalisée. C'est une grosse plus value.<br>\nLes concepts théoriques sont expliqué avec une certaines clarté et la vulgarisation est brève mais efficace.<br> \nUn autre point fort, les applications en conditions réel du TIPE sont multiples et viennent directement à l'esprit.<br>\n-> 15.5/20\n<br><br>\n2éme exposée: la surveillances de polygones.<br>\nSituation réel mais les idées tels que la géométrie sont dur à explicité à l'oral. De plus, de tels sujets sont propice à des mauvaises conceptions mental des concepts ou du moins différent de ceux pensée par le candidat<br>\nCelon moi, cela crée une certaines confusion et celle-ci est amplifiée par les manipulations abstraites.<br>\nMoins ancrée dans la réalité et les applications sont limité à une situation particulière, même si intéressante.\n<br> \n->13.5/20 ",
+    "attachedFiles": []
   },
   {
     "id": 1770721159914,
